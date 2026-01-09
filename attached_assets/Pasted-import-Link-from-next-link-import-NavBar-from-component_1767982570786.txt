@@ -1,0 +1,50 @@
+import Link from "next/link";
+import NavBar from "../components/NavBar";
+
+export default function Home() {
+  return (
+    <div className="min-h-screen flex flex-col">
+      <NavBar />
+      <main className="flex-1 container mx-auto px-6 py-12">
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div>
+            <h1 className="text-4xl font-bold mb-4">Inspírate con lo que realmente funciona</h1>
+            <p className="text-ttgray mb-6">Feed multiplataforma de videos orgánicos virales + sección Ads para estudiar creativos pagados. Diseñado para creadores, CM y agencias.</p>
+
+            <div className="flex gap-3">
+              <Link href="/dashboard"><a className="px-5 py-3 rounded bg-gradient-to-r from-ttpink to-ttcyan text-black font-semibold">Probar demo</a></Link>
+              <Link href="/login"><a className="px-5 py-3 rounded border border-[#222] text-white">Entrar / Registrar</a></Link>
+            </div>
+          </div>
+
+          <div className="card">
+            <div className="h-60 bg-gradient-to-br from-[#111111] to-[#0b0b0b] rounded flex items-center justify-center">
+              <div className="text-center">
+                <div className="text-2xl font-bold">Feed</div>
+                <div className="text-ttgray mt-2">Esta semana · Lo más viral · Últimos</div>
+                <div className="mt-4">
+                  <img src="/hero-demo.png" alt="demo" className="w-full max-w-sm mx-auto rounded" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="card">
+            <h3 className="font-semibold">Para creadores</h3>
+            <p className="text-ttgray text-sm mt-2">Encuentra formatos que funcionan para tu nicho y ahorra horas de scroll.</p>
+          </div>
+          <div className="card">
+            <h3 className="font-semibold">Para agencias</h3>
+            <p className="text-ttgray text-sm mt-2">Workspaces, aprobaciones y reports listos para presentar a clientes.</p>
+          </div>
+          <div className="card">
+            <h3 className="font-semibold">Ads</h3>
+            <p className="text-ttgray text-sm mt-2">Analiza creativos patrocinados para entender la diferencia con orgánico.</p>
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+}
