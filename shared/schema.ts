@@ -17,6 +17,11 @@ export const videos = pgTable("videos", {
   comments: integer("comments").default(0),
   shares: integer("shares").default(0),
   niche: text("niche").notNull(),
+  // New fields to match Viral Ad Library
+  adType: text("ad_type").notNull().default("Organic"), // Organic or Paid
+  revenue: integer("revenue").default(0), // Monthly revenue
+  hook: text("hook"), // The "hook" used in the video
+  callToAction: text("cta"), // Call to action
 });
 
 export const collections = pgTable("collections", {

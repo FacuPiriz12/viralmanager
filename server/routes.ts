@@ -24,7 +24,11 @@ export async function registerRoutes(
         likes: 85000,
         comments: 3200,
         shares: 4700,
-        niche: "food"
+        niche: "food",
+        adType: "Organic",
+        revenue: 5000,
+        hook: "Bread in 60 seconds",
+        callToAction: "Get the recipe"
       },
       {
         platform: "Instagram",
@@ -38,7 +42,11 @@ export async function registerRoutes(
         likes: 38000,
         comments: 1200,
         shares: 800,
-        niche: "fitness"
+        niche: "fitness",
+        adType: "Paid",
+        revenue: 12000,
+        hook: "10 min arm routine",
+        callToAction: "Join the program"
       },
       {
         platform: "YouTube Shorts",
@@ -52,7 +60,11 @@ export async function registerRoutes(
         likes: 64000,
         comments: 2100,
         shares: 2500,
-        niche: "productivity"
+        niche: "productivity",
+        adType: "Organic",
+        revenue: 2500,
+        hook: "Fast editing hack",
+        callToAction: "Try it now"
       }
     ];
 
