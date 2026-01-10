@@ -1,8 +1,8 @@
-import { Filter, ChevronDown } from "lucide-react";
+import { Filter, ChevronDown, Activity } from "lucide-react";
 
 interface FilterPanelProps {
-  filters: { platform?: string; niche?: string; period?: string };
-  onChange: (filters: { platform?: string; niche?: string; period?: string }) => void;
+  filters: { platform?: string; niche?: string; period?: string; adType?: string };
+  onChange: (filters: { platform?: string; niche?: string; period?: string; adType?: string }) => void;
 }
 
 export function FilterPanel({ filters, onChange }: FilterPanelProps) {
@@ -12,12 +12,18 @@ export function FilterPanel({ filters, onChange }: FilterPanelProps) {
 
   return (
     <div className="bg-ttblack rounded-2xl p-6 border border-[#222] shadow-xl">
-      <div className="flex items-center gap-2 mb-4 text-ttgray">
-        <Filter className="w-4 h-4" />
-        <h4 className="font-semibold text-sm uppercase tracking-wider">Filters</h4>
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-2 text-ttgray">
+          <Filter className="w-4 h-4" />
+          <h4 className="font-semibold text-sm uppercase tracking-wider">Filters</h4>
+        </div>
+        <div className="flex items-center gap-1.5 text-xs text-ttcyan/70 font-mono">
+          <Activity className="w-3 h-3 animate-pulse" />
+          Live Data
+        </div>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className={containerClass}>
           <select 
             value={filters.platform || ""}
@@ -45,6 +51,19 @@ export function FilterPanel({ filters, onChange }: FilterPanelProps) {
             <option value="productivity">Productivity</option>
             <option value="tech">Tech & AI</option>
             <option value="fashion">Fashion</option>
+          </select>
+          <ChevronDown className={iconClass} />
+        </div>
+
+        <div className={containerClass}>
+          <select 
+            value={filters.adType || ""}
+            onChange={(e) => onChange({...filters, adType: e.target.value})} 
+            className={selectClass}
+          >
+            <option value="">All Types</option>
+            <option value="Organic">Organic Only</option>
+            <option value="Paid">Paid Ads Only</option>
           </select>
           <ChevronDown className={iconClass} />
         </div>
