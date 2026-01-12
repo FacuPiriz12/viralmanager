@@ -79,19 +79,19 @@ export default function Home() {
               </a>
             </motion.div>
 
-            <motion.div variants={item} className="pt-8 flex flex-wrap items-center gap-x-12 gap-y-8 opacity-80 hover:opacity-100 transition-all duration-500">
+            <motion.div variants={item} className="pt-8 flex flex-wrap items-center gap-x-12 gap-y-8">
               {/* TikTok Logo */}
-              <div className="h-8">
+              <div className="h-10 opacity-70 hover:opacity-100 transition-opacity">
                 <img src={tiktokLogo} alt="TikTok" className="h-full w-auto brightness-0 invert object-contain" />
               </div>
               
               {/* Instagram Logo */}
-              <div className="h-8">
+              <div className="h-10 opacity-70 hover:opacity-100 transition-opacity">
                 <img src={instagramLogo} alt="Instagram" className="h-full w-auto brightness-0 invert object-contain" />
               </div>
 
               {/* YouTube Logo */}
-              <div className="h-8">
+              <div className="h-10 opacity-70 hover:opacity-100 transition-opacity">
                 <img src={youtubeLogo} alt="YouTube" className="h-full w-auto brightness-0 invert object-contain" />
               </div>
             </motion.div>
