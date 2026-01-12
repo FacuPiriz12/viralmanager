@@ -76,11 +76,25 @@ export default function Home() {
               </a>
             </motion.div>
 
-            <motion.div variants={item} className="pt-8 flex items-center gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-              {/* Fake logos for social proof */}
-              <div className="font-bold text-xl">TikTok</div>
-              <div className="font-bold text-xl">Instagram</div>
-              <div className="font-bold text-xl">YouTube</div>
+            <motion.div variants={item} className="pt-8 flex items-center gap-10 opacity-70 hover:opacity-100 transition-all duration-500">
+              <div className="flex items-center gap-2 group">
+                <div className="w-8 h-8 flex items-center justify-center bg-white rounded-md">
+                   <svg viewBox="0 0 24 24" className="w-5 h-5 fill-black" xmlns="http://www.w3.org/2000/svg"><path d="M12.525.023c1.722 0 3.358.51 4.737 1.382V0h4.481v17.402c0 3.644-2.954 6.598-6.598 6.598-3.643 0-6.598-2.954-6.598-6.598 0-3.643 2.955-6.598 6.598-6.598.411 0 .81.037 1.196.109V6.447c-.886-.25-1.821-.386-2.788-.386-4.481 0-8.114 3.633-8.114 8.114S8.572 22.29 13.053 22.29c4.481 0 8.114-3.633 8.114-8.114V4.481c1.382 1.373 3.358 2.22 5.534 2.22h.023V2.22C24.467 2.22 21.6 0 18.068 0h-5.543v.023z"/></svg>
+                </div>
+                <span className="font-bold text-lg hidden sm:inline">TikTok</span>
+              </div>
+              <div className="flex items-center gap-2 group">
+                <div className="w-8 h-8 flex items-center justify-center bg-gradient-to-tr from-[#f09433] via-[#e6683c] via-[#dc2743] via-[#cc2366] to-[#bc1888] rounded-md shadow-sm">
+                  <svg viewBox="0 0 24 24" className="w-5 h-5 fill-white" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.981 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                </div>
+                <span className="font-bold text-lg hidden sm:inline">Instagram</span>
+              </div>
+              <div className="flex items-center gap-2 group">
+                <div className="w-8 h-8 flex items-center justify-center bg-[#FF0000] rounded-md">
+                   <svg viewBox="0 0 24 24" className="w-5 h-5 fill-white" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.377.505 9.377.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </div>
+                <span className="font-bold text-lg hidden sm:inline">YouTube</span>
+              </div>
             </motion.div>
           </div>
 
