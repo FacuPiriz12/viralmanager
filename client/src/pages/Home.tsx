@@ -1,7 +1,9 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { Play, TrendingUp, BarChart3, Target } from "lucide-react";
-import { SiTiktok, SiInstagram, SiYoutube } from "react-icons/si";
+import youtubeLogo from "@assets/youtube_PNG3_1768329462147.png";
+import instagramLogo from "@assets/Instagram_logo.svg_1768329462149.png";
+import tiktokLogo from "@assets/Tiktok_logo_text.svg_1768329462150.png";
 
 export default function Home() {
   const container = {
@@ -79,21 +81,18 @@ export default function Home() {
 
             <motion.div variants={item} className="pt-8 flex flex-wrap items-center gap-x-12 gap-y-8">
               {/* TikTok Logo */}
-              <div className="flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
-                <SiTiktok className="w-8 h-8" />
-                <span className="font-bold text-xl">TikTok</span>
+              <div className="h-10 opacity-70 hover:opacity-100 transition-opacity">
+                <img src={tiktokLogo} alt="TikTok" className="h-full w-auto object-contain" />
               </div>
               
               {/* Instagram Logo */}
-              <div className="flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
-                <SiInstagram className="w-8 h-8" />
-                <span className="font-bold text-xl">Instagram</span>
+              <div className="h-10 opacity-70 hover:opacity-100 transition-opacity">
+                <img src={instagramLogo} alt="Instagram" className="h-full w-auto object-contain brightness-0 invert" />
               </div>
 
               {/* YouTube Logo */}
-              <div className="flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
-                <SiYoutube className="w-8 h-8" />
-                <span className="font-bold text-xl">YouTube</span>
+              <div className="h-10 opacity-70 hover:opacity-100 transition-opacity">
+                <img src={youtubeLogo} alt="YouTube" className="h-full w-auto object-contain brightness-0 invert" />
               </div>
             </motion.div>
           </div>
