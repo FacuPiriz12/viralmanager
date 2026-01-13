@@ -1,9 +1,7 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { Play, TrendingUp, BarChart3, Target } from "lucide-react";
-import youtubeLogo from "@assets/youtube_PNG3_1768329462147.png";
-import instagramLogo from "@assets/Instagram_logo.svg_1768329462149.png";
-import tiktokLogo from "@assets/Tiktok_logo_text.svg_1768329462150.png";
+import { SiTiktok, SiInstagram, SiYoutube } from "react-icons/si";
 
 export default function Home() {
   const container = {
@@ -81,18 +79,21 @@ export default function Home() {
 
             <motion.div variants={item} className="pt-8 flex flex-wrap items-center gap-x-12 gap-y-8">
               {/* TikTok Logo */}
-              <div className="h-8 opacity-70 hover:opacity-100 transition-opacity">
-                <img src={tiktokLogo} alt="TikTok" className="h-full w-auto object-contain brightness-0 invert" />
+              <div className="flex items-center gap-2 opacity-70 hover:opacity-100 transition-all duration-300">
+                <SiTiktok className="w-8 h-8 text-white" />
+                <span className="font-display font-bold text-xl tracking-tight text-white">TikTok</span>
               </div>
               
               {/* Instagram Logo */}
-              <div className="h-8 opacity-70 hover:opacity-100 transition-opacity">
-                <img src={instagramLogo} alt="Instagram" className="h-full w-auto object-contain brightness-0 invert" />
+              <div className="flex items-center gap-2 opacity-70 hover:opacity-100 transition-all duration-300">
+                <SiInstagram className="w-8 h-8 text-white" />
+                <span className="font-display font-bold text-xl tracking-tight text-white">Instagram</span>
               </div>
 
               {/* YouTube Logo */}
-              <div className="h-8 opacity-70 hover:opacity-100 transition-opacity">
-                <img src={youtubeLogo} alt="YouTube" className="h-full w-auto object-contain brightness-0 invert" />
+              <div className="flex items-center gap-2 opacity-70 hover:opacity-100 transition-all duration-300">
+                <SiYoutube className="w-8 h-8 text-white" />
+                <span className="font-display font-bold text-xl tracking-tight text-white">YouTube</span>
               </div>
             </motion.div>
           </div>
