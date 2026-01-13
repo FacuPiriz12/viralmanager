@@ -36,13 +36,41 @@ export default function Dashboard() {
           </div>
           
           <div className="flex gap-3">
+             <div className="flex items-center gap-2">
+               <input 
+                 id="import-url"
+                 type="text" 
+                 placeholder="Paste TikTok/Reel URL..." 
+                 className="bg-white border border-gray-200 text-sm rounded-lg px-4 py-2 w-64 outline-none focus:ring-2 focus:ring-ttcyan/50 transition-all"
+               />
+               <button 
+                 onClick={async () => {
+                   const input = document.getElementById('import-url') as HTMLInputElement;
+                   const url = input.value;
+                   if (!url) return;
+                   
+                   try {
+                     const response = await fetch('/api/videos/import', {
+                       method: 'POST',
+                       headers: { 'Content-Type': 'application/json' },
+                       body: JSON.stringify({ url })
+                     });
+                     if (response.ok) {
+                       input.value = '';
+                       window.location.reload(); // Refresh to see new video
+                     }
+                   } catch (err) {
+                     console.error(err);
+                   }
+                 }}
+                 className="bg-[#0F0F0F] text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors text-sm font-bold shadow-lg shadow-black/5"
+               >
+                 Import Viral
+               </button>
+             </div>
              <button className="flex items-center gap-2 bg-[#1a1a1a] hover:bg-[#222] border border-[#333] text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium">
                 <Sparkles className="w-4 h-4 text-ttcyan" />
                 AI Insights
-             </button>
-             <button className="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors text-sm font-bold shadow-lg shadow-white/5">
-                <Plus className="w-4 h-4" />
-                Add Video
              </button>
           </div>
         </div>
