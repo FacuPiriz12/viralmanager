@@ -81,17 +81,17 @@ export default function Home() {
 
             <motion.div variants={item} className="pt-8 flex flex-wrap items-center gap-x-12 gap-y-8">
               {/* TikTok Logo */}
-              <div className="h-10 opacity-70 hover:opacity-100 transition-opacity">
-                <img src={tiktokLogo} alt="TikTok" className="h-full w-auto object-contain" />
+              <div className="h-8 opacity-70 hover:opacity-100 transition-opacity">
+                <img src={tiktokLogo} alt="TikTok" className="h-full w-auto object-contain brightness-0 invert" />
               </div>
               
               {/* Instagram Logo */}
-              <div className="h-10 opacity-70 hover:opacity-100 transition-opacity">
+              <div className="h-7 opacity-70 hover:opacity-100 transition-opacity">
                 <img src={instagramLogo} alt="Instagram" className="h-full w-auto object-contain brightness-0 invert" />
               </div>
 
               {/* YouTube Logo */}
-              <div className="h-10 opacity-70 hover:opacity-100 transition-opacity">
+              <div className="h-6 opacity-70 hover:opacity-100 transition-opacity">
                 <img src={youtubeLogo} alt="YouTube" className="h-full w-auto object-contain brightness-0 invert" />
               </div>
             </motion.div>
