@@ -1,9 +1,7 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { Play, TrendingUp, BarChart3, Target } from "lucide-react";
-import tiktokLogo from "@assets/stock_images/tiktok_black_logo_wo_7c107403.jpg";
-import instagramLogo from "@assets/stock_images/instagram_script_log_c2afbcae.jpg";
-import youtubeLogo from "@assets/stock_images/youtube_official_log_79573c7d.jpg";
+import { SiTiktok, SiInstagram, SiYoutube } from "react-icons/si";
 
 export default function Home() {
   const container = {
@@ -81,18 +79,21 @@ export default function Home() {
 
             <motion.div variants={item} className="pt-8 flex flex-wrap items-center gap-x-12 gap-y-8">
               {/* TikTok Logo */}
-              <div className="h-10 opacity-70 hover:opacity-100 transition-opacity">
-                <img src={tiktokLogo} alt="TikTok" className="h-full w-auto brightness-0 invert object-contain" />
+              <div className="flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
+                <SiTiktok className="w-8 h-8" />
+                <span className="font-bold text-xl">TikTok</span>
               </div>
               
               {/* Instagram Logo */}
-              <div className="h-10 opacity-70 hover:opacity-100 transition-opacity">
-                <img src={instagramLogo} alt="Instagram" className="h-full w-auto brightness-0 invert object-contain" />
+              <div className="flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
+                <SiInstagram className="w-8 h-8" />
+                <span className="font-bold text-xl">Instagram</span>
               </div>
 
               {/* YouTube Logo */}
-              <div className="h-10 opacity-70 hover:opacity-100 transition-opacity">
-                <img src={youtubeLogo} alt="YouTube" className="h-full w-auto brightness-0 invert object-contain" />
+              <div className="flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
+                <SiYoutube className="w-8 h-8" />
+                <span className="font-bold text-xl">YouTube</span>
               </div>
             </motion.div>
           </div>
