@@ -9,14 +9,14 @@
   --font-display: 'Outfit', sans-serif;
 
   /* Base Colors - HSL values forshadcn compatibility */
-  --background: 0 0% 4.3%; /* #0b0b0b - ttbg */
-  --foreground: 0 0% 100%;
+  --background: 0 0% 100%; /* White */
+  --foreground: 0 0% 3.9%; /* Near black */
   
-  --card: 0 0% 5.9%; /* #0f0f0f - ttblack */
-  --card-foreground: 0 0% 100%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 3.9%;
  
-  --popover: 0 0% 5.9%;
-  --popover-foreground: 0 0% 100%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 3.9%;
  
   --primary: 345 100% 58.8%; /* #ff2d55 - ttpink */
   --primary-foreground: 0 0% 100%;
@@ -24,19 +24,19 @@
   --secondary: 187 92% 56.9%; /* #2be0f7 - ttcyan */
   --secondary-foreground: 0 0% 0%;
  
-  --muted: 0 0% 15%;
-  --muted-foreground: 0 0% 63.9%; /* #a3a3a3 - ttgray */
+  --muted: 0 0% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
  
-  --accent: 0 0% 15%;
-  --accent-foreground: 0 0% 100%;
+  --accent: 0 0% 96.1%;
+  --accent-foreground: 0 0% 9%;
  
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 0 0% 100%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
  
-  --border: 0 0% 15%;
-  --input: 0 0% 15%;
+  --border: 0 0% 89.8%;
+  --input: 0 0% 89.8%;
   --ring: 345 100% 58.8%; /* ttpink */
- 
+
   --radius: 0.5rem;
 }
 
@@ -50,17 +50,17 @@
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
-    @apply font-bold tracking-tight;
+    @apply font-bold tracking-tight text-[#0F0F0F];
   }
 }
 
 /* Custom Utilities based on provided design */
 @layer utilities {
-  .bg-ttbg { background-color: #0b0b0b; }
-  .bg-ttblack { background-color: #0f0f0f; }
+  .bg-ttbg { background-color: #FFFFFF; }
+  .bg-ttblack { background-color: #F8F9FA; }
   .text-ttpink { color: #ff2d55; }
   .text-ttcyan { color: #2be0f7; }
-  .text-ttgray { color: #a3a3a3; }
+  .text-ttgray { color: #6B7280; }
   
   .bg-gradient-brand {
     @apply bg-gradient-to-r from-[#ff2d55] to-[#2be0f7];
@@ -71,6 +71,6 @@
   }
 
   .card-hover {
-    @apply transition-all duration-300 hover:shadow-lg hover:shadow-[#ff2d55]/10 hover:-translate-y-1 border border-border/50 hover:border-[#ff2d55]/30;
+    @apply transition-all duration-300 hover:shadow-xl hover:shadow-[#ff2d55]/5 hover:-translate-y-1 border border-border/50 hover:border-[#ff2d55]/30 bg-white;
   }
 }

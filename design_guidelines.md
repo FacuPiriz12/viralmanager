@@ -1,144 +1,131 @@
-# Design Guidelines: Viral Video Management Platform
+# Design Guidelines: Viral Video Management Platform (Light Edition)
 
 ## Design Approach
-**Reference-Based**: TikTok aesthetic with dark mode foundation, gradient accents, and modern video-first UI patterns. Supplement with Linear's typography clarity and Notion's dashboard organization.
+**Reference-Based**: TikTok's clean, content-first aesthetic adapted to light mode + Instagram's bright, airy layouts + Linear's crisp typography and spacious organization.
 
 ## Core Design Principles
-- **Dark-First Interface**: Deep charcoal/near-black backgrounds (#0a0a0a to #1a1a1a)
-- **Gradient Accent System**: Pink (#FF006E) to Cyan (#00F5FF) gradients for CTAs, highlights, and interactive elements
-- **Video-Centric Layout**: Large preview areas, thumbnail grids, and immersive playback zones
-- **High-Tech Polish**: Glassmorphism effects, subtle animations, sharp edges with occasional soft glows
+- **Light-First Interface**: Pure white (#FFFFFF) primary surfaces, soft gray (#F8F9FA) secondary backgrounds, light gray (#E9ECEF) borders
+- **Gradient Accent System**: Pink (#FF006E) to Cyan (#00F5FF) for CTAs, highlights, and interactive states
+- **High Contrast Typography**: Near-black text (#0F0F0F) on white for maximum readability
+- **Spacious & Breathing**: Generous whitespace, clean separation between sections
 
 ---
 
 ## Typography System
 
-**Primary Font**: Inter (Google Fonts)
-**Accent Font**: Space Grotesk for headings (Google Fonts)
+**Fonts**: Inter (body), Space Grotesk (headings) via Google Fonts
 
 **Hierarchy**:
-- Hero Headline: Space Grotesk, 56-72px, 700 weight
-- Section Headers: Space Grotesk, 36-48px, 600 weight
-- Body Large: Inter, 18-20px, 400 weight
-- Body Standard: Inter, 15-16px, 400 weight
-- UI Labels: Inter, 13-14px, 500 weight, uppercase tracking (0.5px)
+- Hero Headline: Space Grotesk, 64px desktop/40px mobile, 700 weight, #0F0F0F
+- Section Headers: Space Grotesk, 48px desktop/32px mobile, 600 weight, #0F0F0F
+- Subheadings: Space Grotesk, 24px, 500 weight, #374151
+- Body Large: Inter, 20px, 400 weight, #374151
+- Body Standard: Inter, 16px, 400 weight, #6B7280
+- UI Labels: Inter, 14px, 500 weight, #6B7280, uppercase 0.5px tracking
+- Captions: Inter, 13px, 400 weight, #9CA3AF
 
 ---
 
 ## Layout System
 
-**Spacing Scale**: Tailwind units of 2, 4, 6, 8, 12, 16, 20, 24
-**Container Max-Width**: 1440px with 8 horizontal padding on mobile, 12 on tablet, 16 on desktop
-**Grid System**: 12-column grid for dashboard layouts, 3-column for video galleries on desktop, 2-column tablet, 1-column mobile
+**Spacing Scale**: Tailwind units 2, 4, 8, 12, 16, 20, 24, 32
+**Container**: max-w-7xl, px-8 mobile, px-12 tablet, px-16 desktop
+**Section Padding**: py-20 desktop, py-12 mobile
+**Grid**: 12-column for dashboards, 3-column video galleries (2-col tablet, 1-col mobile)
 
 ---
 
 ## Component Library
 
 ### Navigation
-**Top Bar (Fixed)**:
-- Transparent background with backdrop blur (glassmorphism)
-- Logo left, primary nav center, user profile/CTA right
-- Height: 16 units
-- Gradient underline on active nav items
+**Fixed Top Bar** (h-20):
+- White background with subtle shadow (0 1px 3px rgba(0,0,0,0.05))
+- Logo left, nav center, CTA/profile right
+- Active nav: Gradient underline (2px, pink-to-cyan)
+- Desktop: horizontal menu | Mobile: hamburger menu
 
 ### Hero Section
-**Full-Width Video Showcase**:
-- Height: 85vh on desktop, 70vh mobile
-- Background: Large hero image showing video editing interface or creator dashboard
-- Overlay: Dark gradient (top: transparent, bottom: #0a0a0a 80% opacity)
-- Content: Centered with headline, subtitle (max-width 700px), dual CTA buttons
-- Primary CTA: Pink-to-cyan gradient background with blur effect, white text
-- Secondary CTA: Outlined with gradient border, transparent background with blur
+**Full-Width Image Hero** (85vh desktop, 70vh mobile):
+- Background: High-quality image (1920x1080) of modern video editing workspace with bright screens, clean interface
+- Overlay: Subtle white gradient (bottom: rgba(255,255,255,0.95) for text readability)
+- Content: Centered, max-w-4xl
+- Headline + subheading (max-w-2xl) + dual CTAs
+- Primary CTA: Gradient background (pink-to-cyan), white text, px-8 py-4, rounded-xl, backdrop-blur on image background
+- Secondary CTA: White background with gradient border, gradient text, px-8 py-4, rounded-xl, backdrop-blur
 
-### Video Grid Layouts
-**Masonry-Style Gallery**:
-- 3 columns desktop, 2 tablet, 1 mobile
-- Card design: Rounded corners (12px), hover lift effect
-- Thumbnail: 16:9 aspect ratio with gradient overlay on hover
-- Metadata overlay: View count, duration badge, engagement indicators
-- Glass card background with subtle border
+### Video Grid/Gallery
+**3-Column Masonry** (16:9 thumbnails):
+- Card: White background, rounded-xl, shadow-md, hover lift + shadow-lg
+- Thumbnail gradient overlay on hover (pink-to-cyan, 10% opacity)
+- Metadata: Views, duration badge (gradient background), engagement icons
+- Gap-6 between cards
 
-### Dashboard Sections
-**Stats Cards**:
-- 4-column grid for metrics (views, likes, shares, revenue)
-- Glass card with gradient left border accent
-- Large number (32px), label below (14px)
-- Icon top-right corner (pink/cyan gradient fill)
+### Dashboard Stats
+**4-Column Metric Cards**:
+- White background, rounded-2xl, shadow-sm
+- Gradient left border (4px, pink-to-cyan)
+- Large number (40px, #0F0F0F), label below (14px, #6B7280)
+- Icon top-right with gradient fill
+- p-8 padding
 
-**Video Management Table**:
-- Dark background with alternating row tints
-- Columns: Thumbnail preview, Title, Status (badge), Analytics, Actions
-- Status badges: Gradient backgrounds (processing/live/archived)
-- Inline action buttons with icon-only design
+### Feature Sections
+**Alternating 2-Column Layouts** (Image + Text):
+- Image side: Dashboard mockup screenshots (800x600), rounded-xl, shadow-lg
+- Text side: Heading + description + features list + CTA link
+- Background alternates: white, #F8F9FA
+- py-24 section padding
 
-### Feature Sections (Marketing Pages)
-**3-Column Feature Grid**:
-- Icon (gradient fill) + Title + Description pattern
-- Icons from Heroicons (use gradient CSS for dual-tone effect)
-- Card: Subtle glass background, 20 padding, 16 gap between elements
+**3-Column Feature Cards**:
+- White cards, rounded-xl, p-8, shadow-sm, hover shadow-md
+- Gradient icon (Heroicons), heading, description
+- Gap-8 between cards
 
-**Video Timeline Showcase**:
-- Horizontal scroll on mobile, full-width desktop
-- Visual representation of editing timeline with gradient progress indicators
-- Screenshots/mockups of the interface in action
+### Testimonials
+**2-Column Grid**:
+- White cards with subtle gray border (#E9ECEF)
+- Circular avatar (96px), name/role, quote
+- Gradient quotation mark accent
+- p-8 padding, rounded-2xl
 
-**Testimonials**:
-- 2-column layout with creator profile images
-- Glass card design with quote, name, role, avatar
-- Gradient quotation mark icon
-
-### Forms & Inputs
-**Text Fields**:
-- Dark background (#1a1a1a), 1px gradient border
-- Focus state: Thicker gradient border glow
-- Padding: 4 vertical, 6 horizontal
-- Rounded corners: 8px
+### Forms & CTAs
+**Input Fields**:
+- White background, 1px gray border (#E9ECEF)
+- Focus: Gradient border, subtle shadow
+- Rounded-lg, px-6 py-4
 
 **Upload Zone**:
-- Dashed gradient border
-- Drag-and-drop area with centered icon + text
-- Active state: Solid gradient border
+- Light gray background (#F8F9FA), dashed gradient border
+- Centered icon + text
+- Drag state: Gradient border solidifies
 
-### CTAs & Buttons
-**Primary**: Gradient background (pink-to-cyan), white text, rounded-lg, px-8 py-4
-**Secondary**: Transparent with gradient border, white text, same padding
-**Text Links**: Gradient text color on hover
+**Button Variations**:
+- Primary: Gradient (pink-to-cyan), white text, rounded-xl, shadow-md hover
+- Secondary: White bg, gradient border, gradient text
+- Ghost: Transparent, gradient text hover
 
 ### Footer
-**Multi-Section Layout**:
-- 4-column grid: Logo/tagline, Product links, Resources, Social/Newsletter
-- Dark background with subtle top gradient border
-- Newsletter input: Inline with gradient submit button
-- Social icons: Gradient fill on hover
+**4-Column Layout** (bg #F8F9FA, py-16):
+- Logo/tagline, Product, Resources, Newsletter/Social
+- Gradient divider line at top
+- Newsletter: Inline input + gradient button
+- Social icons with gradient hover states
 
 ---
 
-## Images Section
+## Images
 
-**Hero Image**: 
-- Large, high-quality image (1920x1080 minimum) showing a modern video editing dashboard or content creator workspace with multiple screens, analytics, and vibrant UI elements
-- Placement: Full-width background of hero section
-- Treatment: Slight blur with dark overlay gradient
+**Hero Image**: Bright, modern video editing workspace (1920x1080), multiple monitors showing analytics dashboards, vibrant but clean UI, natural lighting, professional setup
 
-**Feature Section Images**:
-- Dashboard mockup screenshots (3-4 images) showing analytics, video library, editing interface
-- Size: 800x600px approximately
-- Placement: Alternating left/right in feature sections or within glass cards
+**Feature Screenshots**: 4-5 dashboard mockups showing analytics, video library, editing interface, creator profiles (each ~800x600)
 
-**Video Thumbnails**:
-- Placeholder images showing diverse content types (16:9 ratio)
-- Use in grid galleries and management tables
-- Include gradient overlays for interactive states
+**Video Thumbnails**: Diverse content placeholders (16:9), bright and colorful with gradient overlays on interactive states
 
-**Team/Creator Images** (if testimonial section):
-- Circular avatars, 80x80px
-- Placed left of testimonial text
+**Testimonial Avatars**: Circular creator photos (96x96)
 
 ---
 
 ## Visual Effects
-- **Glassmorphism**: backdrop-blur-xl with semi-transparent backgrounds
-- **Gradient Accents**: Pink-to-cyan on borders, buttons, icons, text highlights
-- **Subtle Glows**: Box shadows with gradient colors on hover states
-- **Border Treatments**: 1px gradient borders on cards and containers
+- **Shadows**: Layered shadows (sm, md, lg, xl) for depth without heaviness
+- **Gradients**: Pink-to-cyan on borders, buttons, icons, hover states
+- **Hover States**: Lift (translateY -2px) + shadow increase
+- **Backdrop Blur**: On buttons over images for legibility
