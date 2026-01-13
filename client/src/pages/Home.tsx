@@ -1,9 +1,14 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { Play, TrendingUp, BarChart3, Target } from "lucide-react";
+import { Play, TrendingUp, BarChart3, Target, Sparkles } from "lucide-react";
 import { SiTiktok, SiInstagram, SiYoutube } from "react-icons/si";
+import { VideoCarousel } from "@/components/VideoCarousel";
+import { useVideos } from "@/hooks/use-videos";
+import { computeViralScore } from "@/lib/viralScore";
 
 export default function Home() {
+  const { data: videos = [] } = useVideos();
+  
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -48,7 +53,7 @@ export default function Home() {
           variants={container}
           initial="hidden"
           animate="show"
-          className="grid lg:grid-cols-2 gap-16 items-center"
+          className="grid lg:grid-cols-2 gap-16 items-center mb-24"
         >
           <div className="space-y-8">
             <motion.div variants={item} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 border border-gray-200 text-xs font-medium text-ttpink">
@@ -131,6 +136,23 @@ export default function Home() {
             </div>
           </motion.div>
         </motion.div>
+
+        {/* Carousel Section */}
+        {videos.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="mb-24"
+          >
+            <VideoCarousel 
+              videos={videos.slice(0, 8)} 
+              title="Trending Now" 
+              subtitle="The most viral content across all platforms in the last 24 hours."
+            />
+          </motion.div>
+        )}
       </main>
 
       {/* Features */}

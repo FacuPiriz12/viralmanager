@@ -3,6 +3,7 @@ import { NavBar } from "@/components/NavBar";
 import { FilterPanel } from "@/components/FilterPanel";
 import { CollectionsPanel } from "@/components/CollectionsPanel";
 import { VideoCard } from "@/components/VideoCard";
+import { VideoCarousel } from "@/components/VideoCarousel";
 import { useVideos } from "@/hooks/use-videos";
 import { Loader2, Plus, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
@@ -48,7 +49,18 @@ export default function Dashboard() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Main Content Area */}
-          <div className="lg:col-span-9 space-y-6">
+          <div className="lg:col-span-9 space-y-8">
+            {/* Trending Carousel */}
+            {!isLoading && videos.length > 0 && (
+              <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                <VideoCarousel 
+                  videos={videos.slice(0, 8)} 
+                  title="Viral Trends" 
+                  subtitle="High performing content based on current filters"
+                />
+              </div>
+            )}
+
             <FilterPanel filters={filters} onChange={setFilters} />
 
             {/* Content Grid */}
