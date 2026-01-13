@@ -86,12 +86,12 @@ export default function Home() {
               </div>
               
               {/* Instagram Logo */}
-              <div className="h-7 opacity-70 hover:opacity-100 transition-opacity">
+              <div className="h-8 opacity-70 hover:opacity-100 transition-opacity">
                 <img src={instagramLogo} alt="Instagram" className="h-full w-auto object-contain brightness-0 invert" />
               </div>
 
               {/* YouTube Logo */}
-              <div className="h-6 opacity-70 hover:opacity-100 transition-opacity">
+              <div className="h-8 opacity-70 hover:opacity-100 transition-opacity">
                 <img src={youtubeLogo} alt="YouTube" className="h-full w-auto object-contain brightness-0 invert" />
               </div>
             </motion.div>
