@@ -121,11 +121,14 @@ export class ViralFetcher {
       if (!igUserId) return this.getMockInstagramData(username);
 
       const response = await fetch(
-        `https://graph.facebook.com/v19.0/${igUserId}/media?fields=id,caption,media_type,media_url,thumbnail_url,permalink,timestamp,like_count,comments_count&access_token=${accessToken}`
+        `https://graph.facebook.com/v19.0/${igUserId}/media?fields=id,caption,media_type,media_url,thumbnail_url,permalink,timestamp,like_count,comments_count,play_count&access_token=${accessToken}`
       );
       const data = await response.json();
 
-      if (!data.data) return this.getMockInstagramData(username);
+      if (!data.data) {
+        console.warn("No data returned from Instagram Graph API:", data);
+        return this.getMockInstagramData(username);
+      }
 
       return data.data
         .filter((item: any) => item.media_type === "VIDEO")
@@ -136,7 +139,7 @@ export class ViralFetcher {
           author: username,
           handle: `@${username}`,
           publishedAt: new Date(item.timestamp),
-          views: 0, // Graph API doesn't always provide 'play_count' for all media types easily
+          views: item.play_count || 0,
           likes: item.like_count || 0,
           comments: item.comments_count || 0,
           niche: "instagram_sync",
