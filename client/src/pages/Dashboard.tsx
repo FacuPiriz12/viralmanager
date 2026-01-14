@@ -7,6 +7,7 @@ import { VideoCarousel } from "@/components/VideoCarousel";
 import { useVideos } from "@/hooks/use-videos";
 import { Loader2, Plus, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
+import ResXCarousel from "@/components/ResXCarousel";
 
 export default function Dashboard() {
   const [filters, setFilters] = useState<{ platform?: string; niche?: string; period?: string }>({});
@@ -78,6 +79,18 @@ export default function Dashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Main Content Area */}
           <div className="lg:col-span-9 space-y-8">
+            {/* ResX Featured Strategies */}
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+              <div className="p-6 pb-0">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="h-px w-6 bg-ttpink" />
+                  <span className="text-ttpink font-bold uppercase tracking-widest text-[10px]">Premium Insights</span>
+                </div>
+                <h3 className="text-xl font-display font-bold text-[#0F0F0F]">Creative Strategies</h3>
+              </div>
+              <ResXCarousel />
+            </div>
+
             {/* Trending Carousel */}
             {!isLoading && videos.length > 0 && (
               <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
