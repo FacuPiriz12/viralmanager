@@ -95,4 +95,31 @@ app.use((req, res, next) => {
       log(`serving on port ${port}`);
     },
   );
+
+  // Autonomous background task for syncing viral videos
+  if (process.env.YOUTUBE_API_KEY) {
+    const { storage } = await import("./storage");
+    const { viralFetcher } = await import("./services/viralFetcher");
+    
+    const syncViralContent = async () => {
+      try {
+        log("Starting autonomous sync of viral content...");
+        const trending = await viralFetcher.fetchTrendingShorts();
+        for (const video of trending) {
+          // Check if video exists by URL
+          const existing = await storage.getVideos({ search: video.title });
+          if (!existing.some(v => v.url === video.url)) {
+            await storage.createVideo(video as any);
+          }
+        }
+        log(`Synced ${trending.length} viral videos.`);
+      } catch (err) {
+        log(`Sync failed: ${err}`, "error");
+      }
+    };
+
+    // Run sync on startup and then every 6 hours
+    syncViralContent();
+    setInterval(syncViralContent, 6 * 60 * 60 * 1000);
+  }
 })();
