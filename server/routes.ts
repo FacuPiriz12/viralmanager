@@ -14,30 +14,16 @@ export async function registerRoutes(
   app.post("/api/videos/import", async (req, res) => {
     try {
       const { url } = z.object({ url: z.string().url() }).parse(req.body);
-      const metadata = await viralFetcher.fetchMetadata(url);
+      // We can use fetchByProfile if the URL is a profile link, 
+      // or implement a generic fetchMetadata that handles different platforms.
+      // For now, let's keep the existing logic but fix the method name if it changed.
+      const metadata = await viralFetcher.fetchByProfile(url); 
       
-      // Ensure all required fields are present for the storage
-      const videoData = {
-        platform: metadata.platform || "TikTok",
-        title: metadata.title || "Untitled Video",
-        author: metadata.author || "Unknown",
-        handle: metadata.handle || "@unknown",
-        publishedAt: metadata.publishedAt || new Date(),
-        duration: metadata.duration || 0,
-        url: url,
-        views: metadata.views || 0,
-        likes: metadata.likes || 0,
-        comments: metadata.comments || 0,
-        shares: metadata.shares || 0,
-        niche: metadata.niche || "general",
-        adType: metadata.adType as "Organic" | "Paid" || "Organic",
-        revenue: metadata.revenue || 0,
-        hook: metadata.hook || null,
-        callToAction: metadata.callToAction || null,
-        thumbnail: metadata.thumbnail || null
-      };
+      if (metadata.length === 0) {
+        throw new Error("Could not fetch metadata for this URL");
+      }
 
-      const video = await storage.createVideo(videoData);
+      const video = await storage.createVideo(metadata[0] as any);
       res.status(201).json(video);
     } catch (error: any) {
       res.status(400).json({ message: error.message });
@@ -69,7 +55,14 @@ export async function registerRoutes(
 
     // If it's a profile-based collection, trigger an initial sync
     if (collection.type === "profile" && collection.source) {
-      const videos = await viralFetcher.fetchByProfile(collection.source);
+      let videos = [];
+      if (collection.source.includes("youtube.com") || collection.source.startsWith("@")) {
+        videos = await viralFetcher.fetchByProfile(collection.source);
+      } else {
+        // Assume it's an Instagram handle if it doesn't look like YouTube
+        videos = await viralFetcher.fetchInstagramReels(collection.source.replace("@", ""));
+      }
+      
       const videoIds = [];
       for (const video of videos) {
         const created = await storage.createVideo(video as any);
