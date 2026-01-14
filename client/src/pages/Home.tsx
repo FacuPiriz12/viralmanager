@@ -5,6 +5,7 @@ import { SiTiktok, SiInstagram, SiYoutube } from "react-icons/si";
 import { VideoCarousel } from "@/components/VideoCarousel";
 import { useVideos } from "@/hooks/use-videos";
 import { computeViralScore } from "@/lib/viralScore";
+import ResXCarousel from "@/components/ResXCarousel";
 
 export default function Home() {
   const { data: videos = [] } = useVideos();
@@ -135,6 +136,24 @@ export default function Home() {
               </div>
             </div>
           </motion.div>
+        </motion.div>
+
+        {/* ResX Carousel Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-24"
+        >
+          <div className="px-6 md:px-12 mb-8">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="h-px w-8 bg-ttpink" />
+              <span className="text-ttpink font-bold uppercase tracking-widest text-xs">Featured Collections</span>
+            </div>
+            <h2 className="text-3xl font-display font-bold text-[#0F0F0F]">Trending Creative Strategies</h2>
+          </div>
+          <ResXCarousel />
         </motion.div>
 
         {/* Carousel Section */}
