@@ -167,5 +167,6 @@ export class ViralFetcher {
       }
     ];
   }
+}
 
 export const viralFetcher = new ViralFetcher();
