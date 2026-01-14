@@ -66,6 +66,19 @@ export async function registerRoutes(
   app.post(api.collections.create.path, async (req, res) => {
     const input = api.collections.create.input.parse(req.body);
     const collection = await storage.createCollection(input);
+
+    // If it's a profile-based collection, trigger an initial sync
+    if (collection.type === "profile" && collection.source) {
+      const videos = await viralFetcher.fetchByProfile(collection.source);
+      const videoIds = [];
+      for (const video of videos) {
+        const created = await storage.createVideo(video as any);
+        videoIds.push(created.id);
+      }
+      await storage.updateCollection(collection.id, { videoIds });
+      collection.videoIds = videoIds;
+    }
+
     res.status(201).json(collection);
   });
 

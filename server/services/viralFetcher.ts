@@ -63,21 +63,43 @@ export class ViralFetcher {
     ];
   }
 
-  async fetchMetadata(url: string): Promise<Partial<InsertVideo>> {
-    const platform = this.detectPlatform(url);
-    // Real implementation would call specific scrapers/APIs per platform
-    return {
-      platform,
-      url,
-      title: "Viral Content " + new Date().toLocaleDateString(),
-      author: "Viral Creator",
-      handle: "@viral_creator",
-      publishedAt: new Date(),
-      views: Math.floor(Math.random() * 1000000),
-      likes: Math.floor(Math.random() * 50000),
-      niche: "general",
-      thumbnail: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&h=600&fit=crop"
-    };
+  /**
+   * Fetches trending videos from a specific YouTube channel/profile.
+   */
+  async fetchByProfile(handle: string): Promise<Partial<InsertVideo>[]> {
+    if (!this.YOUTUBE_API_KEY) return this.getMockTrending();
+
+    try {
+      // 1. Get channel ID from handle
+      const searchRes = await fetch(
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&q=${handle}&key=${this.YOUTUBE_API_KEY}`
+      );
+      const searchData = await searchRes.json();
+      const channelId = searchData.items?.[0]?.id?.channelId;
+
+      if (!channelId) return [];
+
+      // 2. Get most popular videos from that channel
+      const videoRes = await fetch(
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&order=viewCount&type=video&maxResults=10&key=${this.YOUTUBE_API_KEY}`
+      );
+      const videoData = await videoRes.json();
+
+      return videoData.items.map((item: any) => ({
+        platform: "YouTube Shorts",
+        url: `https://youtube.com/shorts/${item.id.videoId}`,
+        title: item.snippet.title,
+        author: item.snippet.channelTitle,
+        handle: `@${handle.replace("@", "")}`,
+        publishedAt: new Date(item.snippet.publishedAt),
+        niche: "profile_sync",
+        adType: "Organic",
+        thumbnail: item.snippet.thumbnails.high?.url,
+      }));
+    } catch (error) {
+      console.error("Error fetching by profile:", error);
+      return [];
+    }
   }
 
   private detectPlatform(url: string): string {

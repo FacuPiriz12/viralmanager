@@ -27,6 +27,8 @@ export const videos = pgTable("videos", {
 export const collections = pgTable("collections", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
+  type: text("type").default("manual"), // manual, profile, hashtag
+  source: text("source"), // @username or #hashtag
   videoIds: integer("video_ids").array().default([]),
 });
 
