@@ -4,15 +4,16 @@ import * as schema from "@shared/schema";
 
 const { Pool } = pg;
 
+// Supabase Connection String (DATABASE_URL)
+// For local development, make sure to add it to your Secrets/Env Vars
 if (!process.env.DATABASE_URL) {
-  throw new Error(
-    "DATABASE_URL must be set. Please check your environment variables in Render.",
-  );
+  console.warn("DATABASE_URL is not set. Database operations will fail.");
 }
 
-// Render uses SSL for its databases, so we ensure it's handled
 export const pool = new Pool({ 
   connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false
+  // Supabase usually requires SSL. We enable it by default but allow disabling via NO_SSL
+  ssl: process.env.NO_SSL ? false : { rejectUnauthorized: false }
 });
+
 export const db = drizzle(pool, { schema });
