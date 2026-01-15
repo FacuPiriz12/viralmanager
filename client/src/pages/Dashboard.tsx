@@ -37,15 +37,6 @@ export default function Dashboard() {
           </div>
           
           <div className="flex gap-3">
-             <a 
-               href="https://viralfindr.com" 
-               target="_blank" 
-               rel="noopener noreferrer"
-               className="flex items-center gap-2 bg-[#1a1a1a] hover:bg-[#222] border border-[#333] text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium"
-             >
-                <Sparkles className="w-4 h-4 text-ttpink" />
-                Find Trends on ViralFindr
-             </a>
              <div className="flex items-center gap-2">
                <input 
                  id="import-url"

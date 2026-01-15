@@ -104,10 +104,52 @@ export class ViralFetcher {
 
   /**
    * Fetches trending reels from a specific Instagram profile.
-   * Note: This method currently uses mock data as the user has opted for ViralFindr (manual/third-party discovery).
+   * Uses a third-party scraping API via RapidAPI for background integration.
    */
   async fetchInstagramReels(username: string): Promise<Partial<InsertVideo>[]> {
-    return this.getMockInstagramData(username);
+    const rapidApiKey = process.env.RAPIDAPI_KEY;
+    if (!rapidApiKey) {
+      console.warn("RAPIDAPI_KEY not set. Using mock Instagram data.");
+      return this.getMockInstagramData(username);
+    }
+
+    try {
+      // Using 'Instagram API - Fast & Reliable Data Scraper' from mediacrawlers on RapidAPI
+      const response = await fetch(
+        `https://instagram-api-fast-reliable-data-scraper.p.rapidapi.com/user/reels?username=${username}`,
+        {
+          method: "GET",
+          headers: {
+            "X-RapidAPI-Key": rapidApiKey,
+            "X-RapidAPI-Host": "instagram-api-fast-reliable-data-scraper.p.rapidapi.com",
+          },
+        }
+      );
+      const data = await response.json();
+
+      if (!data.items) {
+        console.warn("No data returned from RapidAPI Instagram:", data);
+        return this.getMockInstagramData(username);
+      }
+
+      return data.items.map((item: any) => ({
+        platform: "Instagram",
+        url: `https://www.instagram.com/reels/${item.code}/`,
+        title: item.caption?.text?.split("\n")[0] || "Instagram Reel",
+        author: item.user.full_name,
+        handle: `@${item.user.username}`,
+        publishedAt: new Date(item.taken_at * 1000),
+        views: item.play_count || 0,
+        likes: item.like_count || 0,
+        comments: item.comment_count || 0,
+        niche: "instagram_sync",
+        adType: "Organic",
+        thumbnail: item.thumbnail_url,
+      }));
+    } catch (error) {
+      console.error("Error fetching Instagram reels via RapidAPI:", error);
+      return this.getMockInstagramData(username);
+    }
   }
 
   private getMockInstagramData(username: string): Partial<InsertVideo>[] {
