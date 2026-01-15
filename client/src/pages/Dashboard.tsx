@@ -91,13 +91,35 @@ export default function Dashboard() {
               <ResXCarousel />
             </div>
 
-            {/* Trending Carousel */}
-            {!isLoading && videos.length > 0 && (
+            {/* Instagram Trending Carousel */}
+            {!isLoading && videos.filter(v => v.platform === "Instagram").length > 0 && (
               <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
                 <VideoCarousel 
-                  videos={videos.slice(0, 8)} 
-                  title="Viral Trends" 
-                  subtitle="High performing content based on current filters"
+                  videos={videos.filter(v => v.platform === "Instagram").slice(0, 8)} 
+                  title="Instagram Virals" 
+                  subtitle="Top performing Reels today"
+                />
+              </div>
+            )}
+
+            {/* TikTok Trending Carousel */}
+            {!isLoading && videos.filter(v => v.platform === "TikTok").length > 0 && (
+              <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                <VideoCarousel 
+                  videos={videos.filter(v => v.platform === "TikTok").slice(0, 8)} 
+                  title="TikTok Trends" 
+                  subtitle="What's explosive on TikTok"
+                />
+              </div>
+            )}
+
+            {/* YouTube Shorts Carousel */}
+            {!isLoading && videos.filter(v => v.platform === "YouTube Shorts").length > 0 && (
+              <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                <VideoCarousel 
+                  videos={videos.filter(v => v.platform === "YouTube Shorts").slice(0, 8)} 
+                  title="YouTube Shorts" 
+                  subtitle="Viral short-form on YouTube"
                 />
               </div>
             )}

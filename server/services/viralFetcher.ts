@@ -11,18 +11,19 @@ export class ViralFetcher {
    * Fetches trending videos from YouTube Shorts as a source of viral content.
    */
   async fetchTrendingShorts(): Promise<Partial<InsertVideo>[]> {
-    if (!this.YOUTUBE_API_KEY) {
-      console.warn("YOUTUBE_API_KEY not set. Using mock data.");
-      return this.getMockTrending();
+    const youtubeKey = process.env.YOUTUBE_API_KEY;
+    if (!youtubeKey) {
+      console.warn("YOUTUBE_API_KEY not set. Using mock YouTube data.");
+      return this.getMockYouTubeTrending();
     }
 
     try {
       const response = await fetch(
-        `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&chart=mostPopular&videoCategoryId=42&maxResults=10&key=${this.YOUTUBE_API_KEY}`
+        `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&chart=mostPopular&videoCategoryId=42&maxResults=10&key=${youtubeKey}`
       );
       const data = await response.json();
 
-      if (!data.items) return this.getMockTrending();
+      if (!data.items) return this.getMockYouTubeTrending();
 
       return data.items.map((item: any) => ({
         platform: "YouTube Shorts",
@@ -40,8 +41,27 @@ export class ViralFetcher {
       }));
     } catch (error) {
       console.error("Error fetching YouTube trending:", error);
-      return this.getMockTrending();
+      return this.getMockYouTubeTrending();
     }
+  }
+
+  private getMockYouTubeTrending(): Partial<InsertVideo>[] {
+    return [
+      {
+        platform: "YouTube Shorts",
+        url: "https://youtube.com/shorts/mock1",
+        title: "Viral YouTube Strategy",
+        author: "Video Pro",
+        handle: "@videopro",
+        publishedAt: new Date(),
+        views: 2500000,
+        likes: 120000,
+        comments: 4500,
+        niche: "trending",
+        adType: "Organic",
+        thumbnail: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&h=600&fit=crop"
+      }
+    ];
   }
 
   private getMockTrending(): Partial<InsertVideo>[] {
