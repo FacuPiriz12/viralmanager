@@ -114,12 +114,21 @@ export class ViralFetcher {
     }
 
     try {
-      // 1. Get Instagram Business Account ID
-      // This usually requires a multi-step process: User -> Pages -> IG Account
-      // For this implementation, we assume the user provides the IG_USER_ID directly or we fetch it.
-      const igUserId = process.env.INSTAGRAM_USER_ID; 
-      if (!igUserId) return this.getMockInstagramData(username);
+      // 1. Attempt to find the Instagram Business Account ID automatically from the user's pages
+      const accountsRes = await fetch(
+        `https://graph.facebook.com/v19.0/me/accounts?fields=instagram_business_account{id}&access_token=${accessToken}`
+      );
+      const accountsData = (await accountsRes.json()) as any;
+      
+      const igUserId = process.env.INSTAGRAM_USER_ID || 
+                      accountsData.data?.find((page: any) => page.instagram_business_account)?.instagram_business_account?.id;
 
+      if (!igUserId) {
+        console.warn("Could not find an Instagram Business Account linked to the provided token.");
+        return this.getMockInstagramData(username);
+      }
+
+      // 2. Fetch media using the discovered (or configured) IG User ID
       const response = await fetch(
         `https://graph.facebook.com/v19.0/${igUserId}/media?fields=id,caption,media_type,media_url,thumbnail_url,permalink,timestamp,like_count,comments_count,play_count&access_token=${accessToken}`
       );
