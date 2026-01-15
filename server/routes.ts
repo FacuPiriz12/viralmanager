@@ -9,7 +9,27 @@ export async function registerRoutes(
   httpServer: Server,
   app: Express
 ): Promise<Server> {
-  // ... existing seed code ...
+  // Debug route for Instagram ID discovery
+  app.get("/api/debug-ig", async (_req, res) => {
+    try {
+      const accessToken = process.env.INSTAGRAM_ACCESS_TOKEN;
+      if (!accessToken) {
+        return res.status(400).json({ error: "INSTAGRAM_ACCESS_TOKEN not configured in environment" });
+      }
+
+      const response = await fetch(`https://graph.facebook.com/v19.0/me/accounts?fields=name,instagram_business_account{id,username}&access_token=${accessToken}`);
+      const data = (await response.json()) as any;
+      
+      res.json({
+        message: "Instagram ID Discovery",
+        data: data.data || [],
+        instructions: "If you see your Instagram account in 'instagram_business_account', copy the 'id' and set it as INSTAGRAM_USER_ID secret.",
+        raw_response: data
+      });
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  });
 
   app.post("/api/videos/import", async (req, res) => {
     try {
