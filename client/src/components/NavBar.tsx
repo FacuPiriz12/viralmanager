@@ -38,6 +38,15 @@ export function NavBar() {
           <Link href="/dashboard" className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${isActive('/dashboard') ? 'bg-[#1a1a1a] text-white' : 'text-ttgray hover:text-white hover:bg-[#1a1a1a]/50'}`}>
             Explore
           </Link>
+          <a 
+            href="https://viralfindr.com" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="px-4 py-2 rounded-full text-sm font-medium text-ttgray hover:text-white hover:bg-[#1a1a1a]/50 transition-all flex items-center gap-1.5"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-ttpink" />
+            ViralFindr
+          </a>
           <Link href="/ads" className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${isActive('/ads') ? 'bg-[#1a1a1a] text-white' : 'text-ttgray hover:text-white hover:bg-[#1a1a1a]/50'}`}>
             Ads Intelligence
           </Link>
