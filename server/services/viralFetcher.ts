@@ -103,62 +103,11 @@ export class ViralFetcher {
   }
 
   /**
-   * Fetches trending reels from a specific Instagram profile using Meta Graph API.
-   * Note: This requires a valid INSTAGRAM_ACCESS_TOKEN and the account must be a Business/Creator account.
+   * Fetches trending reels from a specific Instagram profile.
+   * Note: This method currently uses mock data as the user has opted for ViralFindr (manual/third-party discovery).
    */
   async fetchInstagramReels(username: string): Promise<Partial<InsertVideo>[]> {
-    const accessToken = process.env.INSTAGRAM_ACCESS_TOKEN;
-    if (!accessToken) {
-      console.warn("INSTAGRAM_ACCESS_TOKEN not set. Using mock Instagram data.");
-      return this.getMockInstagramData(username);
-    }
-
-    try {
-      // 1. Attempt to find the Instagram Business Account ID automatically from the user's pages
-      const accountsRes = await fetch(
-        `https://graph.facebook.com/v19.0/me/accounts?fields=instagram_business_account{id}&access_token=${accessToken}`
-      );
-      const accountsData = (await accountsRes.json()) as any;
-      
-      const igUserId = process.env.INSTAGRAM_USER_ID || 
-                      accountsData.data?.find((page: any) => page.instagram_business_account)?.instagram_business_account?.id;
-
-      if (!igUserId) {
-        console.warn("Could not find an Instagram Business Account linked to the provided token.");
-        return this.getMockInstagramData(username);
-      }
-
-      // 2. Fetch media using the discovered (or configured) IG User ID
-      const response = await fetch(
-        `https://graph.facebook.com/v19.0/${igUserId}/media?fields=id,caption,media_type,media_url,thumbnail_url,permalink,timestamp,like_count,comments_count,play_count&access_token=${accessToken}`
-      );
-      const data = await response.json();
-
-      if (!data.data) {
-        console.warn("No data returned from Instagram Graph API:", data);
-        return this.getMockInstagramData(username);
-      }
-
-      return data.data
-        .filter((item: any) => item.media_type === "VIDEO")
-        .map((item: any) => ({
-          platform: "Instagram",
-          url: item.permalink,
-          title: item.caption?.split("\n")[0] || "Instagram Reel",
-          author: username,
-          handle: `@${username}`,
-          publishedAt: new Date(item.timestamp),
-          views: item.play_count || 0,
-          likes: item.like_count || 0,
-          comments: item.comments_count || 0,
-          niche: "instagram_sync",
-          adType: "Organic",
-          thumbnail: item.thumbnail_url || item.media_url,
-        }));
-    } catch (error) {
-      console.error("Error fetching Instagram reels:", error);
-      return this.getMockInstagramData(username);
-    }
+    return this.getMockInstagramData(username);
   }
 
   private getMockInstagramData(username: string): Partial<InsertVideo>[] {
