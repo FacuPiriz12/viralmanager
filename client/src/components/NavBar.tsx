@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { Search, LogOut, User } from "lucide-react";
+import { Search, LogOut, User, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export function NavBar() {
